@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Fuente Gothica -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <!-- Hoja de estilo -->
+    <link rel="stylesheet" href="src/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+
+  
+  <body>
+    <div class="app">
+
+      <!-- TABLERO -->
+      <div class="dashboard-container">
+
+        <!--------------------------->
+      <!-- PARTE DE ARRIBA DEL TABLERO ------------------------------->
+        <!--------------------------->
+
+        <!---->
+        <div class="dashboard-container-up">
+          <!-- DIV VACIO -->
+          <div class="dashboard-up-container"></div>
+          <!-- TACO DE CARTAS -->
+          <div class="dashboard-up-container">
+            <img class="card-img" src="/src/img/back.jpg" alt="">
+          </div>
+        </div>
+        <!---->
+        <div class="dashboard-container-up puntuacion-container">
+
+          <!-- PUNTUACIÓN -->
+          <div class="dashboard-up-container">
+            <div class="mostrarPuntuacion-container">
+              <p class="mostrarPuntuacion-text" id="puntuacion">Tu puntuación es:</p>
+            </div>
+          </div>
+          
+        </div>
+
+          <!--------------------------->
+        <!-- PARTE DE ABAJO DEL TABLERO ------------------------------->
+          <!--------------------------->
+        <!---->
+        <div class="dashboard-container-down">
+          <!-- MIS CARTAS -->
+          <div class="dashboard-down-container dashboard-cards-main">
+            <!-- CARTA PRINCIPAL -->
+            <img id="carta-img" class="card-img d-hidden" src="" alt="carta-oculta" style="">
+            <!-- SEGUNDA CARTA -->
+            <img id="carta-img" class="card-img d-hidden" src="" alt="carta-oculta" style="">
+            <!-- TERCERA CARTA -->
+            <img id="carta-img" class="card-img d-hidden" src="" alt="carta-oculta" style="">
+            <!-- CUARTA CARTA -->
+            <img id="carta-img" class="card-img d-hidden" src="" alt="carta-oculta" style="">
+          </div>
+
+        </div>
+        <!---->
+      </div>
+
+      <!--  PANEL DE BOTONES  -->
+
+      <div class="dashboard-buttons">
+        <!-- BOTONES -->
+        <div class="container">
+          <button id="btn-pedir-carta" class="button alternative btn-pedirCarta">Pedir carta</button>
+          <button id="btn-mostrar-carta" class="button alternative btn-mostrarCarta">Mostrar carta</button>
+          <button id="btn-plantarse" class="button simple btn-plantarse">Plantarse</button>
+        </div>
+      </div>
+
+      <!-- MUESTRA CARTA -->
+      <div id="muestraCartaContainer" class="muestra-carta-container d-none">
+        <img id="muestra-carta-img" class="muestra-carta-img" src="src/img/baraja-svg/back-1.svg" alt="">
+        <div class="muestra-carta"></div>
+      </div>
+
+      <!-- INICIO DE PARTIDA -->
+      <div id="game-start-container" class="game-start-container">
+        <div class="container">
+          <img class="clown-img" src="src/img/clown.svg" alt="">
+          <h1>Juego de cartas: Siete y medio</h1>
+          <button id="btn-nueva-partida" class="button btn-nueva-partida">Nueva partida</button>
+        </div>
+      </div>
+
+      <!-- PLANTAR PARTIDA -->
+      <div id="game-stop-container" class="game-stop-container d-none">
+        <div class="container">
+          <h1 class="puntuacion-plantarse" id="puntuacion-plantarse"></h1>
+          <p id="texto-plantarse" class="texto-plantarse">Ui...ui...</p>        
+          <button id="btn-nueva-partida" class="button btn-nueva-partida">Nueva partida</button>
+        </div>
+      </div>
+
+      <!-- GAME OVER -->
+      <div id="game-over-container" class="game-over-container d-none">
+        <div class="container">
+          <h1>Game Over</h1>
+          <p>Tu puntuación ha sido 6.5</p>
+          <p>Ui...ui...</p>
+          <button id="btn-nueva-partida" class="button btn-nueva-partida">Nueva partida</button>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" src="/src/main.ts"></script>
+    <script src="src/js/btn.js"></script>
+    <script src="src/js/main.js"></script>
+  </body>
+</html>
