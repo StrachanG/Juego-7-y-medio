@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", function() {
       "src/img/baraja-svg/12_rey-copas.svg": 0.5,
     };
     // Creamos una función para obtener el valor de la carta de copas basado en su ruta de imagen
-  function obtenerValorCarta(rutaImagen: string): number | undefined {
+  function obtenerValorCarta(rutaImagen: string): number {
       return valoresCartas[rutaImagen];
   }
-  // Para llevar un sumatorio de la puntuación del jugador, creamos el inventario de cartas (2)
+  // Para llevar un sumatorio de la puntuación del jugador, agrupamos toda la puntuación del inventario de cartas en una variable (2)
   const valoresCartasInventario: { [rutaImagen: string]: number } = {};
   
   // Creamos una función para actualizar la puntuación total que contendrá diferentes elementos (4)
@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Definimos un elemento <div> del html que mostrará la puntuación del jugador (3)
       const puntuacionElemento = document.getElementById("puntuacion");
+      const puntuacionPlantarse = document.getElementById("puntuacion-plantarse");
+
 
           // Sumar los valores de todas las cartas en el inventario-
 
@@ -62,15 +64,22 @@ document.addEventListener("DOMContentLoaded", function() {
           // Usa la propiedad innerText para cambiar el texto que se muestra dentro del elemento HTML.
           // "Puntuación total: " se concatena con el valor de puntuacionTotal, para mostrar el resultado en pantalla.
           puntuacionElemento.innerText = "Puntuación total: " + puntuacionTotal;
-      }
+          }
+
+          // Verifica si puntuacionElemento es un objeto válido. Si es null o undefined, el bloque de código no se ejecutará.
+          if (puntuacionPlantarse) {
+            // Usa la propiedad innerText para cambiar el texto que se muestra dentro del elemento HTML.
+            // "Puntuación total: " se concatena con el valor de puntuacionTotal, para mostrar el resultado en pantalla.
+            puntuacionPlantarse.innerText = "Puntuación total: " + puntuacionTotal;
+            }
 
   }
   
   // Hasta este punto he definido las cartas del juego y les he asignado valores. 
   // Esto permite realizar cálculos y operaciones basadas en esos valores durante el juego la baraja de cartas (1), 
-  // hemos creado un inventario de cartas donde se pueden agregar las cartas y llevar un sumatorio del valor de las cartas del invetario (2),
-  // también hemos definido un elemento <div> del html que mostrará la puntuación del jugador, inicializando en '0' (3),
-  // función para actualizar la puntuación total en el elemento <div> (4), 
+  // Hemos creado un inventario de cartas donde se pueden agregar las cartas y llevar un sumatorio del valor de las cartas del invetario (2),
+  // También hemos definido un elemento <div> del html que mostrará la puntuación del jugador, inicializando en '0' (3),
+  // Función para actualizar la puntuación total en el elemento <div> (4), 
 
 
 
@@ -104,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // Luego habrá que definir el botón que realice esta función, lo haremos mas adelante.
     function mostrarCarta(): void {
       // busca obtener el elemento HTML con el ID "muestra-carta-img". 
-      // Al hacer un "casting" a HTMLImageElement, el código asume que el elemento es una imagen 
+      // Al hacer un "casting" a HTMLImageElement, el código asume que el elemento es una imagen.
       // y que se pueden usar métodos y propiedades relacionados con imágenes, como setAttribute("src", ...).
       const imagenCarta = document.getElementById("muestra-carta-img") as HTMLImageElement;
       // El condicional if (imagenCarta && cartaSeleccionada) verifica dos cosas:
@@ -115,28 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
         imagenCarta.setAttribute("src", cartaSeleccionada);
       }
     }    
-  // También tengo que crear una función que muestre la puntuación del jugador en el <div> que mostrará la puntuación
-    function muestraPuntuacion(puntuacion: number): void {
-      // Obtenemos el <div> donde queremos mostrar la puntuación en pantalla
-      const puntuacionElemento = document.getElementById("puntuacion");
-      if (puntuacionElemento) {
-        puntuacionElemento.innerText = "Puntuación: " + puntuacion;
-      }
-    }
-
-  // También tengo que crear una función que muestre la puntuación del jugador en el <div> al final del juego
-  function muestraPuntuacion2(puntuacionTotal: number): void {
-    // Obtenemos el <div> donde queremos mostrar la puntuación en pantalla
-    const muestraPuntuacion2 = document.getElementById("puntuacion-plantarse");  
-    // El condicional garantiza que el código solo intente actualizar la puntuación si el elemento existe.
-
-    if (muestraPuntuacion2) {
-      muestraPuntuacion2.innerText = "Puntuación: " + puntuacionTotal;
-    }
-  }
-
-
-
 
     // Ahora vamos a crear el botón pedir carta. 
     // Y vamos a definir todos los eventos que se activan al hacer clic en él.
@@ -150,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (btnPedirCarta) {
       btnPedirCarta.addEventListener("click", () => {
         pedirCarta();
-        muestraPuntuacion(obtenerValorCarta(cartaSeleccionada));
       });
     }
     // Ahora vamos a crear el botón mostrar carta.       
@@ -206,50 +192,51 @@ document.addEventListener("DOMContentLoaded", function() {
     // Y vamos a definir todos los eventos que se activan al hacer clic en él.
       // Para ello buscamos el boton con id "btn-plantarse".
   const btnPlantarse = document.getElementById("btn-plantarse");
-  if (btnPlantarse) {
+  if (btnPlantarse !== null && btnPlantarse !== undefined && btnPlantarse instanceof HTMLButtonElement) 
       btnPlantarse.addEventListener("click", () => {
           // Calcular la puntuación total actual
           actualizarPuntuacionTotal();
+
           // Desactivar los botones de "Pedir carta" y "Mostrar carta" después de plantarse
-          // Verificar si btnPedirCarta y btnMostrarCarta están definidos para evitar errores
-        const btnPedirCarta = document.getElementById("btn-pedir-carta");
-        const btnMostrarCarta = document.getElementById("btn-mostrar-carta");
-
-        if (btnPedirCarta) {
+          if (btnPedirCarta !== null && btnPedirCarta !== undefined && btnPedirCarta instanceof HTMLButtonElement){
             btnPedirCarta.disabled = true;
-        }
-
-        if (btnMostrarCarta) {
+          }
+            
+          if (btnMostrarCarta !== null && btnMostrarCarta !== undefined && btnMostrarCarta instanceof HTMLButtonElement){
             btnMostrarCarta.disabled = true;
-        }
+          }
+
+
+
   
   
           // Mostrar mensaje según la puntuación
-  const puntuacionElemento = document.getElementById("puntuacion");
-  if (puntuacionElemento) {
-      const puntuacionTexto = puntuacionElemento.innerText.replace("Puntuación total: ", "");
-      const puntuacion = parseFloat(puntuacionTexto);
+  const puntuacionPlantarse = document.getElementById("puntuacion-plantarse");
+  //if (puntuacionPlantarse && puntuacionPlantarse instanceof HTMLDivElement) {
+      const puntuacionTexto = puntuacionPlantarse?.innerText.replace("Puntuación total: ", "");
+      const puntuacion = parseFloat(puntuacionTexto??'0');
       let mensaje = "";
-      if (puntuacion < 4) {
-          mensaje = "Has sido muy conservador.";
-      } else if (puntuacion === 5) {
-          mensaje = "Te ha entrado el canguelo eh?";
-      } else if (puntuacion >= 6 && puntuacion <= 7) {
-          mensaje = "Casi casi...";
-      } else if (puntuacion === 7.5) {
-          mensaje = "¡Lo has clavado! ¡Enhorabuena!";
-      }
-  
+        if (puntuacion <= 4) {
+            mensaje = "Has sido muy conservador.";
+        } else if (puntuacion <= 6) {
+            mensaje = "Te ha entrado el canguelo eh?";
+        } else if ( puntuacion <= 7) {
+            mensaje = "Casi casi...";
+        } else if (puntuacion === 7.5) {
+            mensaje = "¡Lo has clavado! ¡Enhorabuena!";
+        }
+        // Mostrar el mensaje en el contenedor "texto-plantarse"
+        const textoPlantarseElemento = document.getElementById("texto-plantarse");
+        if (textoPlantarseElemento) {
+            textoPlantarseElemento.innerText = mensaje;
+        }
 
-
-      // Mostrar el mensaje en el contenedor "texto-plantarse"
-      const textoPlantarseElemento = document.getElementById("texto-plantarse");
-      if (textoPlantarseElemento) {
-          textoPlantarseElemento.innerText = mensaje;
-      }
-  }
+let x:number = 0;debugger
+        while(x<5){
+          x++; // x = x +1 
+          console.log(x);
+        }
+    //  }
           
-      });
-  }
-
-})
+    });
+  })

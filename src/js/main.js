@@ -2,6 +2,7 @@ $(document).ready(function(){
 
     //botones
     var btnNuevaPartida = $('#btn-nueva-partida');
+    var btnNuevaPartidaPlantarse = $('#btn-nueva-partida-Plantarse');
     var btnPedirCarta = $('#btn-pedir-carta');
     var btnMostrarCarta = $('#btn-mostrar-carta');
     var btnPlantarse = $('#btn-plantarse');
@@ -50,6 +51,13 @@ $(document).ready(function(){
 btnNuevaPartida.click(function() {
     reiniciarJuego(); // Llama a la función para reiniciar el juego
     gameStartContainer.toggleClass('d-none');   
+    plantarPartidaContainer.addClass('d-none');
+    
+});
+
+// Nueva partida
+btnNuevaPartidaPlantarse.click(function() {
+    reiniciarJuego(); // Llama a la función para reiniciar el juego
     plantarPartidaContainer.addClass('d-none');
     
 });
